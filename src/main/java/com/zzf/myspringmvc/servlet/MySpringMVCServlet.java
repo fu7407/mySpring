@@ -185,11 +185,6 @@ public class MySpringMVCServlet extends HttpServlet {
 					continue;
 				}
 				MyRequestMapping mapping = method.getAnnotation(MyRequestMapping.class);
-				// String url = mapping.value();
-				// url = (baseUrl + "/" + url).replaceAll("/+", "/");
-				// handlerMapping.put(url, method);
-				// System.out.println("Mapping : " + url + "," + method);
-
 				String regex = ("/" + baseUrl + mapping.value()).replaceAll("/+", "/");
 				Pattern pattern = Pattern.compile(regex);
 				handlerMapping.add(new Handler(pattern, entry.getValue(), method));
