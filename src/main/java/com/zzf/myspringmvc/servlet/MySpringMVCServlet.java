@@ -214,7 +214,6 @@ public class MySpringMVCServlet extends HttpServlet {
 
 			Map<String, String[]> params = req.getParameterMap();
 			for (Entry<String, String[]> param : params.entrySet()) {
-				System.out.println("param : " + param.getValue());
 				String value = Arrays.toString(param.getValue()).replaceAll("\\[|\\]", "").replaceAll(",\\s", ",");
 				if (!handler.paramIndexMapping.containsKey(param.getKey())) {
 					continue;
