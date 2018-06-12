@@ -46,14 +46,12 @@ public class MySpringMVCServlet extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		System.out.println("-----11111111111------------------");
 		this.doPost(req, resp);
 	}
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
-			System.out.println("--------222222222222---------------");
 			doDispatch(req, resp);
 		} catch (Exception e) {
 			resp.getWriter().write("500 Exception , deails : \r\n" + Arrays.toString(e.getStackTrace()));
