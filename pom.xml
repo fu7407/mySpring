@@ -4,7 +4,6 @@
   <artifactId>myspring</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <packaging>war</packaging>
-  
   <name>myspring</name>
   <description>myspring</description>
   
