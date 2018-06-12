@@ -31,6 +31,11 @@ import com.zzf.myspringmvc.annotaion.MyService;
 
 public class MySpringMVCServlet extends HttpServlet {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	private Properties p = new Properties();
 
 	private List<String> classNames = new ArrayList<String>();
