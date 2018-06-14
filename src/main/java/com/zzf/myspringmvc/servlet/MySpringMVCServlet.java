@@ -193,6 +193,7 @@ public class MySpringMVCServlet extends HttpServlet {
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	private void doDispatch(HttpServletRequest req, HttpServletResponse resp) throws Exception {
 		try {
 			Handler handler = getHandler(req);
