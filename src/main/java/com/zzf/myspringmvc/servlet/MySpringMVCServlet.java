@@ -67,7 +67,7 @@ public class MySpringMVCServlet extends HttpServlet {
 		doAutowired();
 		// 5°¢≥ı ºªØHandlerMapping
 		initHandlerMapping();
-		System.out.println("zzf mvc init success !");
+		System.out.println("************************zzf mvc init success !");
 	}
 
 	private void loadconfig(String location) {
