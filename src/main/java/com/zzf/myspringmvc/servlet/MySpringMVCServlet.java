@@ -33,7 +33,7 @@ public class MySpringMVCServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
-	// ÅäÖÃÎÄ¼ş
+	// é…ç½®æ–‡ä»¶
 	private Properties p = new Properties();
 
 	private List<String> classNames = new ArrayList<String>();
@@ -59,15 +59,15 @@ public class MySpringMVCServlet extends HttpServlet {
 	@Override
 	public void init(ServletConfig config) throws ServletException {
 		System.out.println("************************zzf mvc init start !");
-		// 1.¼ÓÔØÅäÖÃÎÄ¼ş
+		// 1.åŠ è½½é…ç½®æ–‡ä»¶
 		loadconfig(config.getInitParameter("contextConfigLocation"));
-		// 2¡¢³õÊ¼»¯ËùÓĞÏà¹ØÁªµÄÀàÉ¨Ãè
+		// 2ã€åˆå§‹åŒ–æ‰€æœ‰ç›¸å…³è”çš„ç±»æ‰«æ
 		doScanner(p.getProperty("scanPackage"));
-		// 3¡¢½«ËùÓĞÏà¹ØÀàµÄÊµÀı³õÊ¼»¯£¬²¢½«Æä±£´æµ½IOCÈİÆ÷ÖĞ
+		// 3ã€å°†æ‰€æœ‰ç›¸å…³ç±»çš„å®ä¾‹åˆå§‹åŒ–ï¼Œå¹¶å°†å…¶ä¿å­˜åˆ°IOCå®¹å™¨ä¸­
 		doInstance();
-		// 4¡¢×Ô¶¯»¯µÄÒÀÀµ×¢Èë
+		// 4ã€è‡ªåŠ¨åŒ–çš„ä¾èµ–æ³¨å…¥
 		doAutowired();
-		// 5¡¢³õÊ¼»¯HandlerMapping
+		// 5ã€åˆå§‹åŒ–HandlerMapping
 		initHandlerMapping();
 		System.out.println("************************zzf mvc init success !");
 	}
@@ -108,22 +108,22 @@ public class MySpringMVCServlet extends HttpServlet {
 		try {
 			for (String className : classNames) {
 				Class<?> clazz = Class.forName(className);
-				// ½øĞĞÊµÀı»¯£¬Ô­ÔòÎÊÌâ£¨ÓÃ·´ÉäÀ´ÊµÀı»¯£©
-				// ÅĞ¶Ï£¬²»ÊÇËùÓĞµÄÀà¶¼ÊÇÒªÊµÀı»¯£¨Ö»´¦ÀíMyControllerºÍMyService£©
+				// è¿›è¡Œå®ä¾‹åŒ–ï¼ŒåŸåˆ™é—®é¢˜ï¼ˆç”¨åå°„æ¥å®ä¾‹åŒ–ï¼‰
+				// åˆ¤æ–­ï¼Œä¸æ˜¯æ‰€æœ‰çš„ç±»éƒ½æ˜¯è¦å®ä¾‹åŒ–ï¼ˆåªå¤„ç†MyControllerå’ŒMyServiceï¼‰
 				if (clazz.isAnnotationPresent(MyController.class)) {
 					String beanName = lowerFirst(clazz.getSimpleName());
 					ioc.put(beanName, clazz.newInstance());
 				} else if (clazz.isAnnotationPresent(MyService.class)) {
 					MyService service = clazz.getAnnotation(MyService.class);
-					// Èç¹û×Ô¼º¶¨ÒåÁËÃû×ÖµÄ»°£¬ÓÅÏÈÓÃ×Ô¼º¶¨ÒåµÄÃû×Ö
+					// å¦‚æœè‡ªå·±å®šä¹‰äº†åå­—çš„è¯ï¼Œä¼˜å…ˆç”¨è‡ªå·±å®šä¹‰çš„åå­—
 					String beanName = service.value();
 					if ("".equals(beanName.trim())) {
-						// Èç¹û×Ô¼ºÃ»ÉèÖÃÃû×Ö£¬Ä¬ÈÏ²ÉÓÃÀàÃûµÄÊ××ÖÄ¸Ğ¡Ğ´
+						// å¦‚æœè‡ªå·±æ²¡è®¾ç½®åå­—ï¼Œé»˜è®¤é‡‡ç”¨ç±»åçš„é¦–å­—æ¯å°å†™
 						beanName = lowerFirst(clazz.getSimpleName());
 					}
 					Object instance = clazz.newInstance();
 					ioc.put(beanName, instance);
-					// Èç¹û@MyAutowired±ê×¢µÄÊÇÒ»¸ö½Ó¿ÚµÄ»°£¬Ä¬ÈÏÒª½«ÆäÊµÏÖµÄÀàµÄÊµÀı×¢Èë½øÀ´
+					// å¦‚æœ@MyAutowiredæ ‡æ³¨çš„æ˜¯ä¸€ä¸ªæ¥å£çš„è¯ï¼Œé»˜è®¤è¦å°†å…¶å®ç°çš„ç±»çš„å®ä¾‹æ³¨å…¥è¿›æ¥
 					Class<?>[] interfaces = clazz.getInterfaces();
 					for (Class<?> i : interfaces) {
 						ioc.put(i.getName(), instance);
@@ -142,8 +142,8 @@ public class MySpringMVCServlet extends HttpServlet {
 			return;
 		}
 		for (Entry<String, Object> entry : ioc.entrySet()) {
-			// ÔÚSpringÀïÃæÃ»ÓĞÒşË½
-			// É¨ÃèËùÓĞµÄ×Ö¶Î£¬¿´ÓĞÃ»ÓĞ¼Ó@MyAutowiredµÄ×¢½â
+			// åœ¨Springé‡Œé¢æ²¡æœ‰éšç§
+			// æ‰«ææ‰€æœ‰çš„å­—æ®µï¼Œçœ‹æœ‰æ²¡æœ‰åŠ @MyAutowiredçš„æ³¨è§£
 			Field[] fields = entry.getValue().getClass().getDeclaredFields();
 			for (Field field : fields) {
 				if (!field.isAnnotationPresent(MyAutowired.class)) {
@@ -262,12 +262,12 @@ public class MySpringMVCServlet extends HttpServlet {
 	}
 
 	/**
-	 * Handler¼ÇÂ¼ControllerÖĞµÄRequestMappingºÍMethodµÄ¶ÔÓ¦¹ØÏµ
+	 * Handlerè®°å½•Controllerä¸­çš„RequestMappingå’ŒMethodçš„å¯¹åº”å…³ç³»
 	 * @author zhangzengfu
 	 *
 	 */
 	private class Handler {
-		protected Object controller;// ±£´æ·½·¨¶ÔÓ¦µÄÊµÀı
+		protected Object controller;// ä¿å­˜æ–¹æ³•å¯¹åº”çš„å®ä¾‹
 		protected Method method;
 		protected Pattern pattern;
 		protected Map<String, Integer> paramIndexMapping;
