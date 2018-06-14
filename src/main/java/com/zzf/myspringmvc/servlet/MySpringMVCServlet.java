@@ -38,6 +38,7 @@ public class MySpringMVCServlet extends HttpServlet {
 
 	private List<String> classNames = new ArrayList<String>();
 
+	// IOC容器
 	private Map<String, Object> ioc = new HashMap<String, Object>();
 
 	private List<Handler> handlerMapping = new ArrayList<Handler>();
