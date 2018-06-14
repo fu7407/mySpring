@@ -33,6 +33,7 @@ public class MySpringMVCServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
+	// ÅäÖÃÎÄ¼ş
 	private Properties p = new Properties();
 
 	private List<String> classNames = new ArrayList<String>();
