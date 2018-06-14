@@ -57,6 +57,7 @@ public class MySpringMVCServlet extends HttpServlet {
 
 	@Override
 	public void init(ServletConfig config) throws ServletException {
+		System.out.println("************************zzf mvc init start !");
 		// 1.加载配置文件
 		loadconfig(config.getInitParameter("contextConfigLocation"));
 		// 2、初始化所有相关联的类扫描
